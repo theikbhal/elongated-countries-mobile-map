@@ -1,11 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Top 10 Elongated Countries</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top 10 Elongated Countries</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f2f4f7;
+  color: #222;
+}
+
+header {
+  background: #0d47a1;
+  color: #fff;
+  padding: 16px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+header p {
+  margin: 6px 0 0;
+  font-size: 14px;
+}
+
+.map-section {
+  padding: 12px;
+  background: #fff;
+}
+
+.world-map {
+  width: 100%;
+  height: auto;
+}
+
+.world-map path {
+  stroke: #666;
+  stroke-width: 6;
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke 0.3s, stroke-width 0.3s;
+}
+
+.world-map path.active {
+  stroke: #ff5722;
+  stroke-width: 8;
+}
+
+.list {
+  padding: 12px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+
+.card h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 2px 0;
+  font-size: 14px;
+}
+
+.card strong {
+  color: #0d47a1;
+  font-size: 15px;
+}
+</style>
 </head>
+
 <body>
 
 <header>
@@ -14,22 +91,23 @@
 </header>
 
 <section class="map-section">
+  <!-- Simplified SVG world reference -->
   <svg viewBox="0 0 1000 500" class="world-map">
-    <!-- Simplified continents -->
-    <path id="chile" d="M320 180 L330 350" />
-    <path id="gambia" d="M460 250 L490 255" />
-    <path id="japan" d="M820 170 L840 260" />
-    <path id="vietnam" d="M720 210 L735 300" />
-    <path id="mozambique" d="M570 260 L590 380" />
-    <path id="italy" d="M480 190 L500 250" />
-    <path id="malawi" d="M550 300 L560 350" />
-    <path id="norway" d="M470 90 L480 180" />
-    <path id="panama" d="M260 260 L300 265" />
-    <path id="laos" d="M700 230 L715 270" />
+    <path id="chile" d="M320 170 L330 360" />
+    <path id="gambia" d="M460 255 L490 258" />
+    <path id="japan" d="M820 160 L845 280" />
+    <path id="vietnam" d="M720 210 L735 310" />
+    <path id="mozambique" d="M570 260 L590 390" />
+    <path id="italy" d="M485 190 L505 260" />
+    <path id="malawi" d="M550 305 L560 360" />
+    <path id="norway" d="M470 80 L480 190" />
+    <path id="panama" d="M260 265 L305 270" />
+    <path id="laos" d="M700 230 L715 280" />
   </svg>
 </section>
 
 <section class="list">
+
   <div class="card" data-country="chile">
     <h2>🇨🇱 Chile</h2>
     <p>Length: 4,300 km</p>
@@ -99,8 +177,27 @@
     <p>Width: 300 km</p>
     <strong>Ratio: 3.3 : 1</strong>
   </div>
+
 </section>
 
-<script src="script.js"></script>
+<script>
+const cards = document.querySelectorAll(".card");
+const paths = document.querySelectorAll(".world-map path");
+
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+    const country = card.dataset.country;
+
+    paths.forEach(p => p.classList.remove("active"));
+
+    const target = document.getElementById(country);
+    if (target) {
+      target.classList.add("active");
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  });
+});
+</script>
+
 </body>
 </html>
